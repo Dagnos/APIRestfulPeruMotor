@@ -1,13 +1,34 @@
 const express = require('express')
 // require route handlers.
 // they will all include the same connection pool
-const userRouter = require('./routes/user')
-
+const ordentrabajoRouter = require('./routes/ordentrabajo')
+const vehiculoRouter = require('./routes/vehiculo')
+const tipoordenRouter = require('./routes/tipoorden')
+const monedaRouter = require('./routes/modena')
+const tipotrabajoRouter = require('./routes/tipotrabajo')
+const sucursalesRouter = require('./routes/sucursales')
+const formapagoRouter = require('./routes/formapago')
+const asesorRouter = require('./routes/asesor')
+const facturaRouter = require('./routes/factura')
+const numerootRouter = require('./routes/numeroot')
+const cambiofechaRouter = require('./routes/cambiofecha')
+const periodoRouter = require('./routes/periodo')
 // generic express stuff
 const app = express()
 
-// ...
-app.use('/user', userRouter)
+// ...rutas 
+app.use('/ordentrabajo', ordentrabajoRouter)
+app.use('/vehiculo', vehiculoRouter)
+app.use('/tipoorden', tipoordenRouter)
+app.use('/tipotrabajo', tipotrabajoRouter)
+app.use('/moneda', monedaRouter)
+app.use('/sucursales', sucursalesRouter)
+app.use('/formapago', formapagoRouter)
+app.use('/asesor', asesorRouter)
+app.use('/factura', facturaRouter)
+app.use('/numeroot', numerootRouter)
+app.use('/cambiofecha', cambiofechaRouter)
+app.use('/periodo', periodoRouter)
 
 app.get("/", function(req, res) {
     res.json({ message: "genial! bienvenido a nuestra api!" });
