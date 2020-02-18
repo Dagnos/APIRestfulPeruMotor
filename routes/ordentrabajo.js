@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { poolPromise } = require('../db')
+const sql = require('mssql') 
   
 
 router.get('/', async (req, res) => {
@@ -25,13 +26,21 @@ router.get('/busqueda/:id', async (req, res) => {
   }
 })
 
-// Add a new user
-router.post('/users', (request, response) => {
-  pool.query('INSERT INTO users SET ?', request.body, (error, result) => {
-      if (error) throw error;
-
-      response.status(201).send(`User added with ID: ${result.insertId}`);
-  });
-});
+router.post('/postusuario', async (req, res) => {  
+  try {  
+  const pool = await poolPromise  
+  const result = await pool.request()  
+  .input("USUARIO", sql.VarChar(50), req.body.USUARIO)  
+  .input("SERIE", sql.VarChar(50), req.body.SERIE)  
+  .input("IDRESPONSABLE", sql.VarChar(50), req.body.IDRESPONSABLE)  
+  .input("SUCURSAL", sql.VarChar(50), req.body.SUCURSAL)
+  .input("PASS", sql.VarChar(50), req.body.PASS)  
+  .execute("stp_android_postUsuario")
+  res.json(result.recordset)  
+  } catch (err) {  
+  res.status(400).json({ message: "invalid" })  
+  res.send(err.message)  
+  }  
+  })
 
 module.exports = router;

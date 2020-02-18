@@ -34,6 +34,19 @@ app.get("/", function(req, res) {
     res.json({ message: "genial! bienvenido a nuestra api!" });
 });
 
+app.use((req, res, next) => {
+
+  // Dominio que tengan acceso (ej. 'http://example.com')
+     res.setHeader('Access-Control-Allow-Origin', '*');
+  
+  // Metodos de solicitud que deseas permitir
+     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  
+  // Encabecedados que permites (ej. 'X-Requested-With,content-type')
+     res.setHeader('Access-Control-Allow-Headers', '*');
+  
+  next();
+  })
 
 // No need to connect the pool
 // Just start the web server
