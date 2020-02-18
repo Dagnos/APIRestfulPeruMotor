@@ -1,4 +1,15 @@
 const express = require('express')
+const bodyParser = require('body-parser');
+const app = express()
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+
+app.use(function (req, res, next) {  
+  res.header("Access-Control-Allow-Origin", "*");  
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");  
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');  
+  next();  
+  });
 // require route handlers.
 // they will all include the same connection pool
 const ordentrabajoRouter = require('./routes/ordentrabajo')
@@ -14,7 +25,7 @@ const numerootRouter = require('./routes/numeroot')
 const cambiofechaRouter = require('./routes/cambiofecha')
 const periodoRouter = require('./routes/periodo')
 // generic express stuff
-const app = express()
+
 
 // ...rutas 
 app.use('/ordentrabajo', ordentrabajoRouter)
@@ -34,19 +45,6 @@ app.get("/", function(req, res) {
     res.json({ message: "genial! bienvenido a nuestra api!" });
 });
 
-app.use((req, res, next) => {
-
-  // Dominio que tengan acceso (ej. 'http://example.com')
-     res.setHeader('Access-Control-Allow-Origin', '*');
-  
-  // Metodos de solicitud que deseas permitir
-     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  
-  // Encabecedados que permites (ej. 'X-Requested-With,content-type')
-     res.setHeader('Access-Control-Allow-Headers', '*');
-  
-  next();
-  })
 
 // No need to connect the pool
 // Just start the web server

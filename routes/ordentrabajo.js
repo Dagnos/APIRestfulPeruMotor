@@ -27,6 +27,7 @@ router.get('/busqueda/:id', async (req, res) => {
 })
 
 router.post('/postusuario', async (req, res) => {  
+  console.log(req.body)
   try {  
   const pool = await poolPromise  
   const result = await pool.request()  
@@ -35,11 +36,11 @@ router.post('/postusuario', async (req, res) => {
   .input("IDRESPONSABLE", sql.VarChar(50), req.body.IDRESPONSABLE)  
   .input("SUCURSAL", sql.VarChar(50), req.body.SUCURSAL)
   .input("PASS", sql.VarChar(50), req.body.PASS)  
-  .execute("stp_android_postUsuario")
-  res.json(result.recordset)  
+  .execute("stp_android_postUsuario").then(function (recordSet) {  
+    res.status(200).json({ status: "Success" })  
+    })  
   } catch (err) {  
-  res.status(400).json({ message: "invalid" })  
-  res.send(err.message)  
+    res.status(500).send(err.message)
   }  
   })
 
