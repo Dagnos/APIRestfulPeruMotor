@@ -1,8 +1,15 @@
 const express = require('express')
 const bodyParser = require('body-parser');
+var fileupload = require('express-fileupload')
 const app = express()
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
+
+app.use(fileupload())
+//app.use(bodyParser.urlencoded({extended:true}));
+//app.use(bodyParser.json());
+
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb',extended:true}));
+
 
 app.use(function (req, res, next) {  
   res.header("Access-Control-Allow-Origin", "*");  
@@ -24,6 +31,8 @@ const facturaRouter = require('./routes/factura')
 const numerootRouter = require('./routes/numeroot')
 const cambiofechaRouter = require('./routes/cambiofecha')
 const periodoRouter = require('./routes/periodo')
+const loginRouter = require('./routes/login')
+const imageRouter = require('./routes/image')
 // generic express stuff
 
 
@@ -40,6 +49,8 @@ app.use('/factura', facturaRouter)
 app.use('/numeroot', numerootRouter)
 app.use('/cambiofecha', cambiofechaRouter)
 app.use('/periodo', periodoRouter)
+app.use('/login', loginRouter)
+app.use('/image', imageRouter)
 
 app.get("/", function(req, res) {
     res.json({ message: "genial! bienvenido a nuestra api!" });

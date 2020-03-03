@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/busqueda/:id', async (req, res) => {
   try {
     const pool = await poolPromise
-    const result = await pool.request().query("EXECUTE BUSQUEDA_OT '"+req.params.id+"'")      
+    const result = await pool.request().query("stp_android_getBusquedaOt '"+req.params.id+"'")      
     res.json(result.recordset)   
   } catch (err) {
     res.status(500).send(err.message)
@@ -27,7 +27,7 @@ router.post('/postordentrabajo', async (req, res) => {
   console.log(req.body)
   try { 
     var periodo = req.body.periodo
-    var idsucursal = req.body.sucursal
+    var idsucursal = req.body.idsucursal
     var fechainicio = req.body.fechainicio
     var idmoneda = req.body.idmoneda
     var idresponsable = req.body.idresponsable
@@ -50,8 +50,7 @@ router.post('/postordentrabajo', async (req, res) => {
 <idsucursal>${idsucursal}</idsucursal>
 <idproducto>SERVICIO</idproducto>
 <fechainicio>${fechainicio}</fechainicio>
-<fechafinal>2020-02-18T15:05:58</fechafinal>
-<fechafinreal/>
+<fechafinal>${fechainicio}</fechafinal>
 <idmoneda>${idmoneda}</idmoneda>
 <idresponsable>${idresponsable}</idresponsable>
 <iddocumento>OTR</iddocumento>
@@ -76,7 +75,7 @@ router.post('/postordentrabajo', async (req, res) => {
     .input("lcEmpresa",req.body.lcEmpresa)
     .input("xmlData", miXml)
     .execute("ordenmantenimiento_grabarxml_service").then(function (recordSet) {  
-      res.status(200).json({ status: "Success" })  
+      console.log.json({ status: "Success" })  
       })  
   }catch (err) {
     res.status(500).send(err.message)
