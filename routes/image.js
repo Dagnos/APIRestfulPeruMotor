@@ -10,7 +10,10 @@ router.post('/upload', function(req, res, next) {
             var num = req.body.num
             var img = Buffer.from(req.body.image, 'base64');    
              fs.writeFileSync("./uploads/"+'1_'+num+'.JPEG',img); 
-             console.log(num)    
+             console.log(num)  
+             res.send({
+                success: true,
+                message: "File uploaded!"})  
         }else{
             var file = req.files.image
             file.mv("./uploads/"+file.name,  function (err, result) {
@@ -30,7 +33,10 @@ router.post('/upload2', function(req, res, next) {
             var num = req.body.num
             var img = Buffer.from(req.body.image, 'base64');    
              fs.writeFileSync("./uploads/"+'2_'+num+'.JPEG',img); 
-             console.log(num)    
+             console.log(num)  
+             res.send({
+                success: true,
+                message: "File uploaded!"})  
         }else{
             var file = req.files.image
             file.mv("./uploads/"+file.name,  function (err, result) {
@@ -50,7 +56,10 @@ router.post('/upload3', function(req, res, next) {
             var num = req.body.num
             var img = Buffer.from(req.body.image, 'base64');    
              fs.writeFileSync("./uploads/"+'3_'+num+'.JPEG',img); 
-             console.log(num)    
+             console.log(num)
+             res.send({
+                success: true,
+                message: "File uploaded!"})    
         }else{
             var file = req.files.image
             file.mv("./uploads/"+file.name,  function (err, result) {
@@ -71,7 +80,10 @@ router.post('/upload4', function(req, res, next) {
             var num = req.body.num
             var img = Buffer.from(req.body.image, 'base64');    
              fs.writeFileSync("./uploads/"+'4_'+num+'.JPEG',img); 
-             console.log(num)    
+             console.log(num) 
+             res.send({
+                success: true,
+                message: "File uploaded!"})   
         }else{
             var file = req.files.image
             file.mv("./uploads/"+file.name,  function (err, result) {
@@ -92,7 +104,10 @@ router.post('/upload5', function(req, res, next) {
             var num = req.body.num
             var img = Buffer.from(req.body.image, 'base64');    
              fs.writeFileSync("./uploads/"+'5_'+num+'.JPEG',img); 
-             console.log(num)    
+             console.log(num)  
+             res.send({
+                success: true,
+                message: "File uploaded!"})  
         }else{
             var file = req.files.image
             file.mv("./uploads/"+file.name,  function (err, result) {
@@ -138,8 +153,11 @@ router.post('/upload7', function(req, res, next) {
             var num = req.body.num
             var img = Buffer.from(req.body.image, 'base64');    
              fs.writeFileSync("./uploads/"+'7_'+num+'.JPEG',img); 
-             console.log(num)    
-        }else{
+             console.log(num)
+             res.send({
+                success: true,
+                message: "File uploaded!"})    
+              } else{
             var file = req.files.image
             file.mv("./uploads/"+file.name,  function (err, result) {
             if (err)
@@ -158,7 +176,10 @@ router.post('/uploadfirma', function(req, res, next) {
             var num = req.body.num
             var img = Buffer.from(req.body.image, 'base64');    
              fs.writeFileSync("./uploads/"+'firma_'+num+'.JPEG',img); 
-             console.log(num)    
+             console.log(num)
+             res.send({
+                success: true,
+                message: "File uploaded!"})    
         }else{
             var file = req.files.image
             file.mv("./uploads/"+file.name,  function (err, result) {
