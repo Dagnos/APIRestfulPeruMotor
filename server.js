@@ -49,7 +49,8 @@ app.use('/factura', facturaRouter)
 app.use('/numeroot', numerootRouter)
 app.use('/cambiofecha', cambiofechaRouter)
 app.use('/periodo', periodoRouter)
-app.use('/login', loginRouter)
+app.use('/singin', loginRouter)
+
 app.use('/image', imageRouter)
 
 app.get("/", function(req, res) {
